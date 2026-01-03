@@ -1,0 +1,30 @@
+=== LEFT SIDE ===
+1. RESET    > OLED RESET
+2. PD0      > LCD D4
+3. PD1      > LCD D5
+4. PA1      > OLED DC
+5. PA0      > OLED CS
+6. PD2      > LCD D6
+7. PD3      > LCD D7
+8. PD4      > LCD E
+9. PD5      > LCD RS
+10. GND
+
+
+=== RIGHT SIDE ===
+20. VCC
+19. SCK      > 7SEG CLK, OLED SCK
+18. DO       > 7SEG DIN, OLED SDA
+17. PB5      > LED_RED
+16. PB4      > LED_GREEN
+15. PB3      > LED_WHITE
+14. PB2      > BUTTON_LEFT
+13. PB1      > BUTTON_RIGHT
+12. PB0      > BUTTON_OK
+11. PD6      > 7SEG CS
+
+=== REFERENCE ===
+RESET = PA2
+SCK = PB7
+MISO(DO) = PB6
+MOSI(DI) = PB5
