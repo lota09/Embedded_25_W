@@ -6,7 +6,15 @@
   - Revision history : 1) 2025.12.31 : Initial release 
 *******************************************************************/
 
-#include "butten_input.h"
+#define F_CPU 8000000
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define BUTTON_DDR DDRA
+#define BUTTON_PORT PORTA
+#define BUTTON_PIN PINA
+#define BUTTON_BIT 0
 
 static void button_init(void)
 {

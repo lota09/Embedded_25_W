@@ -1,3 +1,11 @@
+/*******************************************************************
+  - Project          : 2025 Embedded SW
+  - File name        : lcd_words.c
+  - Description      : lcd display and main game logic for hangman game
+  - Owner            : Seokmin Kang
+  - Revision history : 1) 2025.12.31 : Initial release 
+*******************************************************************/
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <string.h>
@@ -5,15 +13,6 @@
 #include <avr/pgmspace.h>
 #include "lcd_words.h"
 
-// Pin Map based on pinmap.txt
-// D4-D7: PD0-PD3
-// E: PD4
-// RS: PD5
-
-#define LCD_PORT PORTD
-#define LCD_DDR DDRD
-#define LCD_RS_BIT 5
-#define LCD_EN_BIT 4
 
 // Global variables for game state
 char current_word_buffer[17]; // Buffer for the target word (unmasked)
@@ -77,6 +76,13 @@ void lcd_gotoxy(uint8_t x, uint8_t y) {
     lcd_write_byte(0, addr);
 }
 
+void lcd_clearline(bool line)
+{
+    lcd_gotoxy(0, line);
+    lcd_puts("                "); // Clear line
+    lcd_gotoxy(0, line); 
+}
+
 // --- Hangman Logic ---
 
 void update_word_display() {
@@ -112,6 +118,7 @@ bool inferword(char c) {
                 guessed_mask[i] = true;
                 found = true;
             }
+            // else for dumb found
         }
     }
     

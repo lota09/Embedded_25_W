@@ -5,21 +5,7 @@
   - Owner            : Seokmin Kang
   - Revision history : 1) 2025.12.31 : Initial release 
 *******************************************************************/
-
-#define F_CPU 8000000
-
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/pgmspace.h>
-#include "oled_bitmap.h"
-
-#define OLED_CS_DDR DDRB
-#define OLED_CS_PORT PORTB
-#define OLED_CS_BIT 0
-
-#define OLED_DC_DDR DDRB
-#define OLED_DC_PORT PORTB
-#define OLED_DC_BIT 1
+#include "oled_life.h"
 
 // ... (SPI functions remain same)
 
@@ -38,6 +24,8 @@ static void SpiTx(uint8_t data)
 
 void sh1106_init(void)
 {
+    life = 5;
+
     const uint8_t init_commands[] = {
         0xae, 0x00, 0x10, // Set Page & Column Addressing Mode
         0xa8, 0x3f, 0xd3, 0x00, 0xd5, 0x50, 0xd9, 0x22, // 
@@ -102,7 +90,7 @@ void sh1106_draw_bitmap(const uint8_t *bitmap, uint8_t width, uint8_t page, uint
     OLED_CS_PORT |= (1 << OLED_CS_BIT); // CS -> 1
 }
 
-void display_lives(uint8_t lives) {
+void display_lives() {
     if (lives > 5) lives = 5;
     
     // Clear the heart area (Assume Page 2-3, full width)
@@ -120,6 +108,20 @@ void display_lives(uint8_t lives) {
         uint8_t w = pgm_read_byte(&oled_bitmap_width[0]);
         sh1106_draw_bitmap(bmp, w, 2, start_col + i * (w + gap));
     }
+}
+
+void lose_life()
+{
+    life--;
+    display_lives();
+}
+
+bool is_lost()
+{
+    if(life > 0)
+        return false;
+    else
+        return true;
 }
 
 int main(void)

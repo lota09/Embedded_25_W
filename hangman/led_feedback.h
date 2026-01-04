@@ -18,32 +18,7 @@
 #define LED_GREEN_BIT 4
 #define LED_WHITE_BIT 3
 
-void led_init()
-{
-    LED_DDR |= (1 << LED_RED_BIT);
-    LED_DDR |= (1 << LED_GREEN_BIT);
-    LED_DDR |= (1 << LED_WHITE_BIT);
-}
-
-void led_turnon(uint8_t color)
-{
-    LED_PIN &= !(1 << color);
-    LED_PORT |= (1 << color);
-}
-
-void led_turnoff(uint8_t color)
-{
-    LED_PIN &= !(1 << color);
-    LED_PORT &= !(1 << color);
-}
-
-void led_blink(uint8_t color, uint8_t count=5, int interval_ms=100)
-{
-    LED_PIN |= (1 << color);
-    while(uint8_t i=0; i<count ; i++)
-    {
-        LED_PORT |= (1 << color);
-        _delay_ms(interval_ms);
-    }
-}
-
+void led_init();
+void led_turnon(uint8_t color);
+void led_turnoff(uint8_t color);
+void led_blink(uint8_t color, uint8_t count=5, int interval_ms=100);
