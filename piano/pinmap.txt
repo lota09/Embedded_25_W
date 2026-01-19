@@ -1,0 +1,28 @@
+=== LEFT SIDE ===
+1. RESET        > 
+2. PD0(PCINT11) > ROTARY_CLK
+3. PD1(TXD)     > CP210
+4. PA1          > BEEP
+5. PA0(XTAL)    > OSC_OUT
+6. PD2(INT0)    > KEYBOARD_CLK
+7. PD3(INT1)    > KEYBOARD_DATA
+8. PD4          > ROTARY_DT
+9. PD5          > LED_GREEN
+10. GND
+
+=== RIGHT SIDE ===
+20. VCC
+19. SCK      >  
+18. DO       >  
+17. PB5      > LCD_RS
+16. PB4      > LCD_E
+15. PB3      > LCD_D7
+14. PB2      > LCD_D6
+13. PB1      > LCD_D5
+12. PB0      > LCD_D4
+11. PD6      > LED_RED
+
+=== REFERENCE ===
+RESET = PA2SCK = PB7
+MISO(DO) = PB6
+MOSI(DI) = PB5

@@ -1,2 +1,5 @@
 docs/
-.vscode
+.vscode/
+.venv/
+software/
+.gitignore
